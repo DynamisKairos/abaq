@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """boulevard URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -20,3 +21,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^chaining/', include('smart_selects.urls')),
 ]
+# Texto para poner al final del <title> de cada página.
+admin.site.site_title = u'Dynamis Kairos C.A.'
+
+# Texto a poner en los <h1> de todas las páginas.
+admin.site.site_header = u'Dynamis Kairos C.A.'
+
+# Texto a poner arriba de la página de index del admin
+admin.site.index_title = u'Panel de control empresarial'
