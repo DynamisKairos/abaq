@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import dj_database_url
+from django.conf import global_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,6 +30,8 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'smart_selects',
+    'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,10 +60,14 @@ ROOT_URLCONF = 'boulevard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.static',
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -71,8 +78,11 @@ TEMPLATES = [
     },
 ]
 
+BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
+
 WSGI_APPLICATION = 'boulevard.wsgi.application'
 
+SMART_SELECTS_JQUERY_URL = True
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -108,6 +118,28 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+DATE_INPUT_FORMATS = (
+    '%d.%m.%Y', '%d.%m.%Y', '%d.%m.%y',
+    '%d-%m-%Y', '%d/%m/%Y', '%d/%m/%y',
+    '%d %b %Y', '%d %B %Y',
+)
+
+DATE_FORMAT = 'j F Y'
+
+TIME_FORMAT = 'H:i'
+
+DATETIME_FORMAT = 'j F Y H:i'
+
+YEAR_MONTH_FORMAT = 'F Y'
+
+MONTH_DAY_FORMAT = 'j F'
+
+SHORT_DATE_FORMAT = 'd/n/Y'  # j N Y
+
+SHORT_DATETIME_FORMAT = 'd/m/Y H:i'  # j N Y H:i
+
+FIRST_DAY_OF_WEEK = 1
+
 # Change 'default' database configuration with $DATABASE_URL.
 DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
 
@@ -122,7 +154,8 @@ ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
-
+# MEDIA_ROOT = os.path.join(PROJECT_ROOT, '/media/')
+# MEDIA_URL = '/media/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, 'static'),
