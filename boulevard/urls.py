@@ -25,7 +25,7 @@ urlpatterns = [
 admin.site.site_title = u'Dynamis Kairos C.A.'
 
 # Texto a poner en los <h1> de todas las páginas.
-admin.site.site_header = u'Dynamis Kairos C.A.'
+admin.site.site_header = u'Sitio de administración'
 
 # Texto a poner arriba de la página de index del admin
 admin.site.index_title = u'Panel de control empresarial'
